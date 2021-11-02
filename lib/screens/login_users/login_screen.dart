@@ -5,10 +5,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:bloc_todo_app/repositories/repositories.dart';
 import 'login_body.dart';
 
-class LoginScreeeen extends StatelessWidget {
+class LoginScreen extends StatelessWidget {
   final UserRepository userRepository;
 
-  LoginScreeeen({Key key, @required this.userRepository})
+  LoginScreen({Key key, @required this.userRepository})
       : assert(userRepository != null),
         super(key: key);
 

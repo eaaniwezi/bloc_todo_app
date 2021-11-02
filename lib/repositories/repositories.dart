@@ -41,11 +41,11 @@ class UserRepository {
   }
 
   Future<List<Task>> fetchTask( ) async {
-    var value = await storage.read(key: 'token');
+    var savedToken = await storage.read(key: 'token');
 
     final response = await http.get(tasksUrl, headers: {
       'content-type': 'application/json',
-      "Authorization" : "JWT " + value
+      "Authorization" : "JWT " + savedToken
     });
 
     if (response.statusCode == 200) {

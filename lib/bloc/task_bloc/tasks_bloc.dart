@@ -5,26 +5,26 @@ import 'package:equatable/equatable.dart';
 import 'package:bloc/bloc.dart';
 import 'package:bloc_todo_app/repositories/repositories.dart';
 
-part 'main_event.dart';
-part 'main_state.dart';
+part 'tasks_event.dart';
+part 'tasks_state.dart';
 
-class MainBloc extends Bloc<MainEvent, MainState> {
+class TasksBloc extends Bloc<TasksEvent, TasksState> {
   final UserRepository userRepository;
 
-  MainBloc({
+  TasksBloc({
     @required this.userRepository
   })  : assert(userRepository != null), super(null);
 
 
   @override
-  Stream<MainState> mapEventToState(MainEvent event) async* {
-    if (event is GetData) {
+  Stream<TasksState> mapEventToState(TasksEvent event) async* {
+    if (event is FetchData) {
       try {
         final  task =  await userRepository.fetchTask();
-        yield MainLoaded(task:task);
+        yield TasksLoaded(task:task);
 
       } catch (error) {
-        yield MainFailure(error: error.toString());
+        yield TasksFailure(error: error.toString());
       }
     }
   }

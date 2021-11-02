@@ -1,15 +1,11 @@
+import 'package:bloc_todo_app/screens/home_screen/main_screen.dart';
+import 'package:bloc_todo_app/screens/login_users/login_screen.dart';
+import 'package:flutter/material.dart';
+import 'repositories/repositories.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'bloc/user_auth_bloc/user_auth_event.dart';
 import 'package:bloc_todo_app/bloc/user_auth_bloc/user_auth_bloc.dart';
 import 'package:bloc_todo_app/bloc/user_auth_bloc/user_auth_state.dart';
-import 'package:bloc_todo_app/bloc/user_login_bloc/user_login_bloc.dart';
-import 'package:bloc_todo_app/screens/login_screen.dart';
-import 'package:flutter/material.dart';
-import 'package:bloc/bloc.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:bloc_todo_app/screens/auth/login_screeeen.dart';
-import 'package:bloc_todo_app/screens/main_screen/main_screen.dart';
-import 'bloc/user_auth_bloc/user_auth_event.dart';
-import 'repositories/repositories.dart';
-
 
 
 void main() {
@@ -36,14 +32,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-    
       home: BlocBuilder<UserAuthBloc, UserAuthState>(
         builder: (context, state) {
           if (state is UserAuthenticated) {
-            return LoginScreeeen(userRepository: userRepository);
+            return HomeScreen(userRepository: userRepository);
           }
           if (state is UserUnauthenticated) {
-         return LoginScreeeen(userRepository: userRepository);
+            return LoginScreen(userRepository: userRepository);
           }
           if (state is UserLoading) {
             return Scaffold(
@@ -54,15 +49,15 @@ class MyApp extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                 Center(
-                            child: Text(
-                              "Please wait a while...",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 18,
-                              ),
-                            ),
-                          )
+                    Center(
+                      child: Text(
+                        "Please wait a while...",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18,
+                        ),
+                      ),
+                    )
                   ],
                 ),
               ),
@@ -77,14 +72,14 @@ class MyApp extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Center(
-                            child: Text(
-                              "Please wait a while...",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 18,
-                              ),
-                            ),
-                          )
+                    child: Text(
+                      "Please wait a while...",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                      ),
+                    ),
+                  )
                 ],
               ),
             ),
