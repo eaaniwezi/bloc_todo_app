@@ -2,7 +2,15 @@
     "On_hold": "On\nhold",
     "In_progress": "In\nprogress",
     "Needs_review": "Needs\nreview",
-    "Approved_Tasks": "Approved\nTasks"
+    "Approved_Tasks": "Approved\nTasks",
+    "empty_username": "username cant be empty",
+    "username_minimum": "Minimum is 4 characters",
+    "enter_your_username": "Enter your username",
+    "waiting": "Please wait a while...",
+    "enter_your_password": "Enter your password",
+    "empty_password": "password cant be empty",
+    "password_minimum": "Minimum is 8 characters",
+    "log_in": "Log in"
 }
 
 

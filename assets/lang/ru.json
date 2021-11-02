@@ -2,5 +2,13 @@
     "On_hold": "На\nпаузе",
     "In_progress": "В\nработе",
     "Needs_review": "Нужно\nпроверить",
-    "Approved_Tasks": "Завершенные\nзадачи"
+    "Approved_Tasks": "Завершенные\nзадачи",
+    "empty_username": "имя пользователя не может быть пустым",
+    "username_minimum": "Минимум 4 символа",
+    "enter_your_username": "Введите свое имя пользователя",
+    "waiting": "Пожалуйста, подождите немного...",
+    "enter_your_password": "Введите свой пароль",
+    "empty_password": "пароль не может быть пустым",
+    "password_minimum": "Минимум 8 символов",
+    "log_in": "Войди"
 }

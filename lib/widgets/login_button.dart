@@ -1,3 +1,4 @@
+import 'package:bloc_todo_app/repositories/app_localization.dart';
 import 'package:flutter/material.dart';
 
 class LoginButton extends StatelessWidget {
@@ -15,9 +16,9 @@ class LoginButton extends StatelessWidget {
           height: 50,
           decoration: BoxDecoration(
               color: Colors.teal[200], borderRadius: BorderRadius.circular(25)),
-          child: const Center(
+          child:  Center(
             child: Text(
-              "Log in",
+              AppLocalization.of(context).getTranslatedValues('log_in'),
               style: TextStyle(
                 color: Colors.black,
               ),

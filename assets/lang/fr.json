@@ -2,6 +2,14 @@
     "On_hold": "En\nattente",
     "In_progress": "En\ncours",
     "Needs_review": "Examen\ndes\nbesoins",
-    "Approved_Tasks": "Tâches\nApprouvées"
+    "Approved_Tasks": "Tâches\nApprouvées",
+    "empty_username": "le nom d'utilisateur ne peut pas être vide",
+    "username_minimum": "Le minimum est de 4 caractères",
+    "enter_your_username": "Saisissez votre nom d'utilisateur",
+    "waiting": "Veuillez patienter un peu...",
+    "enter_your_password": "Entrez votre mot de passe",
+    "empty_password": "le mot de passe ne peut pas être vide",
+    "password_minimum": "Le minimum est de 8 caractères",
+    "log_in":"connecter"
 }
 

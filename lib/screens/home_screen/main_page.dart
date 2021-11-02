@@ -7,6 +7,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:bloc_todo_app/models/task.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class HomeBody extends StatefulWidget {
   @override
@@ -23,8 +24,8 @@ class _HomeBodyState extends State<HomeBody> {
 
   void initState() {
     BlocProvider.of<TasksBloc>(context).add(FetchData());
-    // BlocProvider.of<LanguageBloc>(context)
-    //   ..add(LoadLanguage(locale: Locale('en', 'EN')));
+    BlocProvider.of<LanguageBloc>(context)
+        .add(LoadLanguage(locale: Locale('en', 'US')));
     super.initState();
   }
 
@@ -62,38 +63,76 @@ class _HomeBodyState extends State<HomeBody> {
                 appBar: AppBar(
                   backgroundColor: Colors.grey.shade900,
                   actions: [
-                    DropdownButton(
-                      dropdownColor: Colors.teal,
-                      underline: SizedBox(),
-                      value: lang,
-                      onChanged: (value) {
-                        setState(() {
-                          if (value == "Français 🇫🇷") {
-                            print(value);
-                            BlocProvider.of<LanguageBloc>(context)
-                              ..add(LoadLanguage(locale: Locale('fr', '')));
-                          } else if (value == "English 🇬🇧") {
-                            print(value);
-                            BlocProvider.of<LanguageBloc>(context)
-                              ..add(LoadLanguage(locale: Locale('en', 'EN')));
-                          } else if (value == "Русский 🇷🇺") {
-                            print(value);
-                            BlocProvider.of<LanguageBloc>(context)
-                              ..add(LoadLanguage(locale: Locale('ru', 'RU')));
-                          }
-                          lang = value;
-                        });
-                      },
-                      items: languages.map((value) {
-                        return DropdownMenuItem(
-                          value: value,
-                          child: Text(
-                            value,
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        );
-                      }).toList(),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: DropdownButton(
+                        dropdownColor: Colors.teal,
+                        underline: SizedBox(),
+                        icon: Icon(
+                                FontAwesomeIcons.language,
+                                color: Colors.white,
+                              ),
+                        onChanged: (value) {
+                          setState(() {
+                            if (value == "Français 🇫🇷") {
+                              print(value);
+                              BlocProvider.of<LanguageBloc>(context)
+                                ..add(LoadLanguage(locale: Locale('fr', '')));
+                            } else if (value == "English 🇬🇧") {
+                              print(value);
+                              BlocProvider.of<LanguageBloc>(context)
+                                ..add(LoadLanguage(locale: Locale('en', 'EN')));
+                            } else if (value == "Русский 🇷🇺") {
+                              print(value);
+                              BlocProvider.of<LanguageBloc>(context)
+                                ..add(LoadLanguage(locale: Locale('ru', 'RU')));
+                            }
+                            lang = value;
+                          });
+                        },
+                        items: languages.map((value) {
+                          return DropdownMenuItem(
+                            value: value,
+                            child: Text(
+                              value,
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          );
+                        }).toList(),
+                      ),
                     ),
+                    // DropdownButton(
+                    //   dropdownColor: Colors.teal,
+                    //   underline: SizedBox(),
+                    //   value: lang,
+                    //   onChanged: (value) {
+                    //     setState(() {
+                    //       if (value == "Français 🇫🇷") {
+                    //         print(value);
+                    //         BlocProvider.of<LanguageBloc>(context)
+                    //           ..add(LoadLanguage(locale: Locale('fr', '')));
+                    //       } else if (value == "English 🇬🇧") {
+                    //         print(value);
+                    //         BlocProvider.of<LanguageBloc>(context)
+                    //           ..add(LoadLanguage(locale: Locale('en', 'EN')));
+                    //       } else if (value == "Русский 🇷🇺") {
+                    //         print(value);
+                    //         BlocProvider.of<LanguageBloc>(context)
+                    //           ..add(LoadLanguage(locale: Locale('ru', 'RU')));
+                    //       }
+                    //       lang = value;
+                    //     });
+                    //   },
+                    //   items: languages.map((value) {
+                    //     return DropdownMenuItem(
+                    //       value: value,
+                    //       child: Text(
+                    //         value,
+                    //         style: TextStyle(color: Colors.white),
+                    //       ),
+                    //     );
+                    //   }).toList(),
+                    // ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Container(

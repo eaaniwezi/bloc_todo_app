@@ -22,6 +22,7 @@ class AppLocalization {
 
     _localizedValues =
         mappedJson.map((key, value) => MapEntry(key, value.toString()));
+
   }
 
   String getTranslatedValues(String key) {

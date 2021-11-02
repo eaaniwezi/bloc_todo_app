@@ -53,7 +53,7 @@ class MyApp extends StatelessWidget {
           supportedLocales: [
             Locale('en', 'US'),
             Locale('ru', 'RU'),
-             Locale('fr', ''),
+            Locale('fr', 'FR'),
           ],
           debugShowCheckedModeBanner: false,
           home: BlocBuilder<UserAuthBloc, UserAuthState>(

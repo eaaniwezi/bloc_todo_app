@@ -1,4 +1,6 @@
+import 'package:bloc_todo_app/bloc/language_bloc/language_bloc.dart';
 import 'package:bloc_todo_app/bloc/user_login_bloc/user_login_bloc.dart';
+import 'package:bloc_todo_app/repositories/app_localization.dart';
 import 'package:bloc_todo_app/widgets/login_button.dart';
 import 'package:bloc_todo_app/widgets/text_widget.dart';
 import 'package:flutter/cupertino.dart';
@@ -6,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:bloc_todo_app/repositories/repositories.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class LoginBody extends StatefulWidget {
   final UserRepository userRepository;
@@ -20,6 +23,9 @@ class LoginBody extends StatefulWidget {
 
 class _LoginBodyState extends State<LoginBody> {
   final UserRepository userRepository;
+
+  String lang = "English 🇬🇧";
+  List languages = ["English 🇬🇧", "Русский 🇷🇺", "Français 🇫🇷"];
 
   _LoginBodyState(this.userRepository);
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
@@ -45,18 +51,59 @@ class _LoginBodyState extends State<LoginBody> {
                 key: formKey,
                 child: ListView(
                   children: [
+                    Align(
+                      alignment: Alignment.topRight,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: DropdownButton(
+                          dropdownColor: Colors.teal,
+                          underline: SizedBox(),
+                          icon: Icon(
+                                  FontAwesomeIcons.language,
+                                  color: Colors.white,
+                                ),
+                          onChanged: (value) {
+                            setState(() {
+                              if (value == "Français 🇫🇷") {
+                                print(value);
+                                BlocProvider.of<LanguageBloc>(context)
+                                  ..add(LoadLanguage(locale: Locale('fr', '')));
+                              } else if (value == "English 🇬🇧") {
+                                print(value);
+                                BlocProvider.of<LanguageBloc>(context)
+                                  ..add(LoadLanguage(locale: Locale('en', 'EN')));
+                              } else if (value == "Русский 🇷🇺") {
+                                print(value);
+                                BlocProvider.of<LanguageBloc>(context)
+                                  ..add(LoadLanguage(locale: Locale('ru', 'RU')));
+                              }
+                              lang = value;
+                            });
+                          },
+                          items: languages.map((value) {
+                            return DropdownMenuItem(
+                              value: value,
+                              child: Text(
+                                value,
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            );
+                          }).toList(),
+                        ),
+                      ),
+                    ),
                     Padding(
                       padding: const EdgeInsets.all(10.0),
                       child: TextWidget(
                         // ignore: missing_return
                         textValidator: (value) {
                           if (value.isEmpty) {
-                            return 'username cant be empty';
+                            return AppLocalization.of(context).getTranslatedValues('empty_username');
                           } else if (value.length < 4) {
-                            return 'Minimum is 4 characters';
+                            return AppLocalization.of(context).getTranslatedValues('username_minimum');
                           }
                         },
-                        labelText: "Enter your username",
+                        labelText:AppLocalization.of(context).getTranslatedValues('enter_your_username'),
                         textEditingController: usernameController,
                         isPassword: false,
                       ),
@@ -64,15 +111,15 @@ class _LoginBodyState extends State<LoginBody> {
                     Padding(
                       padding: const EdgeInsets.all(10.0),
                       child: TextWidget(
-                        labelText: 'Enter your password',
+                        labelText: AppLocalization.of(context).getTranslatedValues('enter_your_password'),
                         textEditingController: passwordController,
                         isPassword: true,
                         // ignore: missing_return
                         textValidator: (value) {
                           if (value.isEmpty) {
-                            return 'password cant be empty';
+                            return AppLocalization.of(context).getTranslatedValues('empty_password');
                           } else if (value.length < 8) {
-                            return 'Minimum is 8 characters';
+                            return AppLocalization.of(context).getTranslatedValues('password_minimum');
                           }
                         },
                       ),
@@ -80,7 +127,7 @@ class _LoginBodyState extends State<LoginBody> {
                     state is UserLoginLoading
                         ? Center(
                             child: Text(
-                              "Please wait a while...",
+                             AppLocalization.of(context).getTranslatedValues('waiting'),
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 18,
@@ -101,7 +148,7 @@ class _LoginBodyState extends State<LoginBody> {
                                 );
                               }
                             },
-                          )
+                          ),
                   ],
                 ),
               ),
@@ -111,5 +158,4 @@ class _LoginBodyState extends State<LoginBody> {
       ),
     );
   }
-
 }
