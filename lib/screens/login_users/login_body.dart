@@ -37,6 +37,7 @@ class _LoginBodyState extends State<LoginBody> {
       child: BlocBuilder<UserLoginBloc, UserLoginState>(
         builder: (context, state) {
           return Scaffold(
+            backgroundColor: Colors.black,
             body: Padding(
               padding: const EdgeInsets.only(top: 45, left: 10, right: 10),
               child: Form(

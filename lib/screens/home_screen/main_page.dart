@@ -39,16 +39,11 @@ class _HomeBodyState extends State<HomeBody> {
             home: DefaultTabController(
               length: _startingTabCount,
               child: Scaffold(
-                drawer: Drawer(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[],
-                  ),
-                ),
+               
                 backgroundColor: Colors.black,
                 appBar: AppBar(
                   backgroundColor: Colors.grey.shade900,
-                  title: Text("Kanban"),
+              
                   actions: [
                     Padding(
                       padding: const EdgeInsets.all(8.0),
