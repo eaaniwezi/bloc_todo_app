@@ -1,5 +1,7 @@
+import 'package:bloc_todo_app/bloc/language_bloc/language_bloc.dart';
 import 'package:bloc_todo_app/bloc/task_bloc/tasks_bloc.dart';
 import 'package:bloc_todo_app/bloc/user_auth_bloc/user_auth.dart';
+import 'package:bloc_todo_app/repositories/app_localization.dart';
 import 'package:bloc_todo_app/screens/home_screen/task_item.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -13,21 +15,38 @@ class HomeBody extends StatefulWidget {
 
 class _HomeBodyState extends State<HomeBody> {
   final int _startingTabCount = 4;
-  // ignore: deprecated_member_use
   List<Tab> _tabsHeader = [];
   TabController _tabController;
+
+  String lang = "English 🇬🇧";
+  List languages = ["English 🇬🇧", "Русский 🇷🇺", "Français 🇫🇷"];
+
   void initState() {
     BlocProvider.of<TasksBloc>(context).add(FetchData());
+    // BlocProvider.of<LanguageBloc>(context)
+    //   ..add(LoadLanguage(locale: Locale('en', 'EN')));
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     _tabsHeader = [
-      Tab(text: "On\nhold"),
-      Tab(text: "In\nprogress"),
-      Tab(text: "Needs\nreview"),
-      Tab(text: "Approved\nTasks"),
+      Tab(
+        height: 70,
+        text: AppLocalization.of(context).getTranslatedValues('On_hold'),
+      ),
+      Tab(
+        height: 70,
+        text: AppLocalization.of(context).getTranslatedValues('In_progress'),
+      ),
+      Tab(
+        height: 70,
+        text: AppLocalization.of(context).getTranslatedValues('Needs_review'),
+      ),
+      Tab(
+        height: 70,
+        text: AppLocalization.of(context).getTranslatedValues('Approved_Tasks'),
+      ),
     ];
     return BlocBuilder<TasksBloc, TasksState>(
       builder: (context, state) {
@@ -39,12 +58,42 @@ class _HomeBodyState extends State<HomeBody> {
             home: DefaultTabController(
               length: _startingTabCount,
               child: Scaffold(
-               
                 backgroundColor: Colors.black,
                 appBar: AppBar(
                   backgroundColor: Colors.grey.shade900,
-              
                   actions: [
+                    DropdownButton(
+                      dropdownColor: Colors.teal,
+                      underline: SizedBox(),
+                      value: lang,
+                      onChanged: (value) {
+                        setState(() {
+                          if (value == "Français 🇫🇷") {
+                            print(value);
+                            BlocProvider.of<LanguageBloc>(context)
+                              ..add(LoadLanguage(locale: Locale('fr', '')));
+                          } else if (value == "English 🇬🇧") {
+                            print(value);
+                            BlocProvider.of<LanguageBloc>(context)
+                              ..add(LoadLanguage(locale: Locale('en', 'EN')));
+                          } else if (value == "Русский 🇷🇺") {
+                            print(value);
+                            BlocProvider.of<LanguageBloc>(context)
+                              ..add(LoadLanguage(locale: Locale('ru', 'RU')));
+                          }
+                          lang = value;
+                        });
+                      },
+                      items: languages.map((value) {
+                        return DropdownMenuItem(
+                          value: value,
+                          child: Text(
+                            value,
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        );
+                      }).toList(),
+                    ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Container(

@@ -16,6 +16,4 @@ class UserLoginFailure extends UserLoginState {
 
   const UserLoginFailure({@required this.error});
 
-  @override
-  List<Object> get props => [error];
 }

@@ -28,5 +28,15 @@ class TasksBloc extends Bloc<TasksEvent, TasksState> {
       }
     }
   }
+@override
+  void onChange(Change<TasksState> change) {
+    print(change.currentState);
+    super.onChange(change);
+  }
 
+  @override
+  void onEvent(TasksEvent event) {
+    print(event);
+    super.onEvent(event);
+  }
 }
